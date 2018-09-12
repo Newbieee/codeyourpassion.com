@@ -486,6 +486,7 @@ var TaskComponentComponent = /** @class */ (function () {
         this.dataSource = [];
         this.downloadedData = [];
         this.columnsToDisplay = ['programId', 'programName', 'language', 'keyword', 'copyDesc', 'action'];
+        this.networkStatus = true;
         this.dataToSync = false;
         this.syncInProgress = false;
         this.baseProgramUrl = "https://offline-demo-160ec.firebaseio.com/programs";

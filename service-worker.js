@@ -1,6 +1,6 @@
 importScripts("https://cdn.rawgit.com/mozilla/localForage/master/dist/localforage.js");
 
-var cacheName = 'offline-demo-cache-7';
+var cacheName = 'offline-demo-cache-8';
 var filesToCache = [
 	'/',
 	'/index.html',
