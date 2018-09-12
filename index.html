@@ -8,7 +8,15 @@
 <!-- Add additional services that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-auth.js"></script>
 <script src="node_modules/localforage/dist/localforage.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125730177-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-125730177-1');
+</script>
 <script>
 function init() {
   if('serviceWorker' in navigator) {
