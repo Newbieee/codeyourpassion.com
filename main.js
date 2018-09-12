@@ -324,6 +324,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueueComponentComponent", function() { return QueueComponentComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _manageprograms_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../manageprograms.service */ "./src/app/manageprograms.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -335,9 +336,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var QueueComponentComponent = /** @class */ (function () {
-    function QueueComponentComponent(manageprogramsService) {
+    function QueueComponentComponent(manageprogramsService, snackBar) {
         this.manageprogramsService = manageprogramsService;
+        this.snackBar = snackBar;
         this.programs = [];
         this.downloadedData = [];
         this.columnsToDisplay = ['programId', 'programName', 'language', 'keyword', 'claimed'];
@@ -359,6 +362,7 @@ var QueueComponentComponent = /** @class */ (function () {
                 //modifiedPrograms.push(newObj);
                 this.manageprogramsService.database.ref("/programs").child(programId).update({ "claimed": true });
             }
+            this.snackBar.open('Programs downloaded successfully!', '', { duration: 2000 });
             console.log(modifiedPrograms);
             this.getAllPrograms();
         }
@@ -401,6 +405,7 @@ var QueueComponentComponent = /** @class */ (function () {
             }
             //console.log(this.dataSource);
             _this.dataSource = _this.programs;
+        }, function (error) {
         });
     };
     QueueComponentComponent.prototype.ngOnInit = function () {
@@ -411,7 +416,7 @@ var QueueComponentComponent = /** @class */ (function () {
             selector: 'app-queue-component',
             template: __webpack_require__(/*! ./queue-component.component.html */ "./src/app/queue-component/queue-component.component.html")
         }),
-        __metadata("design:paramtypes", [_manageprograms_service__WEBPACK_IMPORTED_MODULE_1__["ManageprogramsService"]])
+        __metadata("design:paramtypes", [_manageprograms_service__WEBPACK_IMPORTED_MODULE_1__["ManageprogramsService"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"]])
     ], QueueComponentComponent);
     return QueueComponentComponent;
 }());
