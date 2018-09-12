@@ -427,7 +427,7 @@ var QueueComponentComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-dialog-content>\r\n  <div class=\"editingForm\">\r\n    <mat-form-field>\r\n      <input matInput placeholder=\"program id\" value=\"{{data.programId}}\"/>\r\n    </mat-form-field>\r\n\r\n    <mat-form-field>\r\n      <input matInput placeholder=\"title\" value=\"{{data.programName}}\"/>\r\n    </mat-form-field>\r\n\r\n    <mat-form-field>\r\n      <input matInput placeholder=\"language\" value=\"{{data.language}}\"/>\r\n    </mat-form-field>\r\n\r\n    <mat-form-field>\r\n      <input matInput placeholder=\"keyword\" value=\"{{data.keyword}}\"/>\r\n    </mat-form-field>\r\n\r\n    <mat-form-field>\r\n      <textarea matInput placeholder=\"Copy Description\" [(ngModel)]=\"data.copyDesc\"></textarea>\r\n    </mat-form-field>\r\n\r\n\r\n  </div>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions>\r\n  <button mat-button (click)=\"closeDialog()\">Save</button>\r\n</mat-dialog-actions>\r\n"
+module.exports = "<h3 mat-dialog-title>Program Details</h3>\r\n<mat-dialog-content>\r\n  <form class=\"editingForm fullwidth\" name=\"editingForm\">\r\n    <table>\r\n\r\n    <tr>\r\n      <td>\r\n        <mat-form-field>\r\n          <mat-label>Program Id</mat-label>\r\n          <input matInput placeholder=\"program id\" value=\"{{data.programId}}\" disabled=\"true\"/>\r\n        </mat-form-field>\r\n      </td>\r\n      <td></td>\r\n      <td>\r\n        <mat-form-field>\r\n          <mat-label>Program Title</mat-label>\r\n          <input matInput placeholder=\"title\" value=\"{{data.programName}}\" disabled=\"true\"/>\r\n        </mat-form-field>\r\n      </td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>\r\n        <mat-form-field>\r\n          <mat-label>Language</mat-label>\r\n          <input matInput placeholder=\"language\" value=\"{{data.language}}\" disabled=\"true\"/>\r\n        </mat-form-field>\r\n      </td>\r\n      <td></td>\r\n      <td>\r\n        <mat-form-field>\r\n          <mat-label>Keyword</mat-label>\r\n          <input matInput placeholder=\"keyword\" value=\"{{data.keyword}}\" disabled=\"true\"/>\r\n        </mat-form-field>\r\n      </td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colSpan=\"10\">\r\n        <mat-form-field class=\"fullwidth\">\r\n          <mat-label>Copy Description</mat-label>\r\n          <textarea matInput placeholder=\"\"   [(ngModel)]=\"data.copyDesc\" name=\"copyDesc\"></textarea>\r\n        </mat-form-field>\r\n      </td>\r\n    </tr>\r\n\r\n    </table>\r\n  </form>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions>\r\n  <button mat-raised-button color=\"warn\" (click)=\"closeDialog()\">Save</button>\r\n</mat-dialog-actions>\r\n"
 
 /***/ }),
 
@@ -536,7 +536,7 @@ var TaskComponentComponent = /** @class */ (function () {
         dialogRef.afterClosed().subscribe(function (result) {
             //console.log('The dialog was closed');
             _this.program = result;
-            console.log(_this.program);
+            //console.log(this.program);
             if (_this.program && _this.program.copyDesc && _this.program.copyDesc != "") {
                 _this.saveData(_this.program);
             }
@@ -551,7 +551,7 @@ var TaskComponentComponent = /** @class */ (function () {
         this.updateLocalDS(prg);
         this.manageprogramsService.updateProgram(programId, prg).subscribe(function (response) {
             console.log("Program updated successfully in server!");
-            console.log(response);
+            //console.log(response);
             _this.snackBar.open('Program Updated Successfully on server!', '', { duration: 2000 });
         }, function (error) {
             console.log("Error while updating data to the server");
@@ -575,8 +575,8 @@ var TaskComponentComponent = /** @class */ (function () {
     };
     TaskComponentComponent.prototype.updateLocalDS = function (prg) {
         localforage__WEBPACK_IMPORTED_MODULE_2__["getItem"]("userPrograms").then(function (value) {
-            console.log("Existing obj");
-            console.log(value);
+            //console.log("Existing obj");
+            //console.log(value);
             var objKey = Object.keys(value);
             //console.log(objKey);
             for (var i = 0; i < objKey.length; i++) {
@@ -639,7 +639,7 @@ var TaskComponentComponent = /** @class */ (function () {
                     localforage__WEBPACK_IMPORTED_MODULE_2__["removeItem"]("queuedReq", function (response) {
                         _self_2.updateSyncFlag();
                         console.log("All Q requests removed from Local DS");
-                        this.snackBar.open('All data updated to the server!', '', { duration: 2000 });
+                        //_self.snackBar.open('All data updated to the server!', '', {duration: 2000});
                     });
                 }
                 else {
@@ -654,7 +654,7 @@ var TaskComponentComponent = /** @class */ (function () {
                     localforage__WEBPACK_IMPORTED_MODULE_2__["removeItem"]("queuedReq", function (response) {
                         _self_3.updateSyncFlag();
                         console.log("All Q requests removed from Local DS");
-                        this.snackBar.open('All data updated to the server!', '', { duration: 2000 });
+                        //_self.snackBar.open('All data updated to the server!', '', {duration: 2000});
                     });
                 }
                 else {
@@ -665,6 +665,7 @@ var TaskComponentComponent = /** @class */ (function () {
     };
     TaskComponentComponent.prototype.updateSyncFlag = function () {
         this.dataToSync = false;
+        this.snackBar.open('Offline data updated to the server!', '', { duration: 2000 });
     };
     TaskComponentComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -672,7 +673,7 @@ var TaskComponentComponent = /** @class */ (function () {
         this.dataSharingService.networkStatus.subscribe(function (status) {
             _this.networkStatus = status;
             _this.isDataToSync();
-            console.log("Status Updated: " + _this.networkStatus);
+            //console.log("Status Updated: " +this.networkStatus);
         });
         this.isDataToSync();
     };
